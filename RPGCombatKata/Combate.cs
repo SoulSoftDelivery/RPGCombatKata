@@ -2,17 +2,47 @@
 
 namespace RPGCombatKata
 {
+    public class Interacao
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public Personagem FazInteracao { get; set; }
+        public Personagem RecebeInteracao { get; set; }
+        public int DistanciaPersonagens { get; set; }
+    }
+
     public class Personagem
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public string Nome { get; set; }
         public double Saude { get; set; } = 1000;
         public int Nivel { get; set; } = 1;
+        public TipoLutador TipoLutador { get; set; }
         public bool Vivo { get; set; } = true;
+    }
+
+    public class TipoLutador
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Nome { get; set; }
+        public int Alcance { get; set; }
     }
 
     public static class CombateUtils
     {
+        public static bool ValidaDanificar(Interacao interacao)
+        {
+            if (
+                interacao.RecebeInteracao.Vivo &&
+                interacao.FazInteracao.Id != interacao.RecebeInteracao.Id &&
+                interacao.DistanciaPersonagens <= interacao.FazInteracao.TipoLutador.Alcance
+                )
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public static double CalculaQtdRealDanificar(int nivelPersonagemAtaca, int nivelPersonagemRecebeAtaque, double qtdDanificar)
         {
             if ((nivelPersonagemRecebeAtaque - nivelPersonagemAtaca) >= 5)
@@ -31,41 +61,41 @@ namespace RPGCombatKata
 
     public static class Combate
     {
-        public static Personagem Danificar(Personagem personagemAtaca, Personagem personagemRecebeAtaque, double qtdDanificar)
+        public static Personagem Danificar(Interacao interacao, double qtdDanificar)
         {
-            if (personagemRecebeAtaque.Vivo && (personagemAtaca.Id != personagemRecebeAtaque.Id))
+            if (CombateUtils.ValidaDanificar(interacao))
             {
-                qtdDanificar = CombateUtils.CalculaQtdRealDanificar(personagemAtaca.Nivel, personagemRecebeAtaque.Nivel, qtdDanificar);
+                qtdDanificar = CombateUtils.CalculaQtdRealDanificar(interacao.FazInteracao.Nivel, interacao.RecebeInteracao.Nivel, qtdDanificar);
 
-                if ((personagemRecebeAtaque.Saude - qtdDanificar) <= 0)
+                if ((interacao.FazInteracao.Saude - qtdDanificar) <= 0)
                 {
-                    personagemRecebeAtaque.Saude = 0;
-                    personagemRecebeAtaque.Vivo = false;
+                    interacao.RecebeInteracao.Saude = 0;
+                    interacao.RecebeInteracao.Vivo = false;
                 }
                 else
                 {
-                    personagemRecebeAtaque.Saude -= qtdDanificar;
+                    interacao.RecebeInteracao.Saude -= qtdDanificar;
                 }
             }
 
-            return personagemRecebeAtaque;
+            return interacao.RecebeInteracao;
         }
 
-        public static Personagem Curar(Personagem personagemJogador, Personagem personagemCurar, int qtdCurar)
+        public static Personagem Curar(Interacao interacao, int qtdCurar)
         {
-            if (personagemJogador.Vivo && (personagemJogador.Id == personagemCurar.Id))
+            if (interacao.RecebeInteracao.Vivo && (interacao.FazInteracao.Id == interacao.RecebeInteracao.Id))
             {
-                if ((personagemJogador.Saude + qtdCurar) >= 1000)
+                if ((interacao.RecebeInteracao.Saude + qtdCurar) >= 1000)
                 {
-                    personagemJogador.Saude = 1000;
+                    interacao.RecebeInteracao.Saude = 1000;
                 }
                 else
                 {
-                    personagemJogador.Saude += qtdCurar;
+                    interacao.RecebeInteracao.Saude += qtdCurar;
                 }
             }
 
-            return personagemJogador;
+            return interacao.RecebeInteracao;
         }
     }
 }
