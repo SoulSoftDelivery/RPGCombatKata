@@ -4,47 +4,68 @@ namespace RPGCombatKata
 {
     public class Personagem
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Nome { get; set; }
-        public int Saude { get; set; } = 1000;
+        public double Saude { get; set; } = 1000;
         public int Nivel { get; set; } = 1;
         public bool Vivo { get; set; } = true;
     }
 
+    public static class CombateUtils
+    {
+        public static double CalculaQtdRealDanificar(int nivelPersonagemAtaca, int nivelPersonagemRecebeAtaque, double qtdDanificar)
+        {
+            if ((nivelPersonagemRecebeAtaque - nivelPersonagemAtaca) >= 5)
+            {
+                qtdDanificar = qtdDanificar / 2;
+            }
+
+            if ((nivelPersonagemAtaca - nivelPersonagemRecebeAtaque) >= 5)
+            {
+                qtdDanificar *= 1.5;
+            }
+
+            return qtdDanificar;
+        }
+    }
+
     public static class Combate
     {
-        public static Personagem Danificar(Personagem personagem, int totalDanificar)
+        public static Personagem Danificar(Personagem personagemAtaca, Personagem personagemRecebeAtaque, double qtdDanificar)
         {
-            if (personagem.Vivo)
+            if (personagemRecebeAtaque.Vivo && (personagemAtaca.Id != personagemRecebeAtaque.Id))
             {
-                if ((personagem.Saude - totalDanificar) <= 0)
+                qtdDanificar = CombateUtils.CalculaQtdRealDanificar(personagemAtaca.Nivel, personagemRecebeAtaque.Nivel, qtdDanificar);
+
+                if ((personagemRecebeAtaque.Saude - qtdDanificar) <= 0)
                 {
-                    personagem.Saude = 0;
-                    personagem.Vivo = false;
+                    personagemRecebeAtaque.Saude = 0;
+                    personagemRecebeAtaque.Vivo = false;
                 }
                 else
                 {
-                    personagem.Saude -= totalDanificar;
+                    personagemRecebeAtaque.Saude -= qtdDanificar;
                 }
             }
 
-            return personagem;
+            return personagemRecebeAtaque;
         }
 
-        public static Personagem Curar(Personagem personagem, int totalCurar)
+        public static Personagem Curar(Personagem personagemJogador, Personagem personagemCurar, int qtdCurar)
         {
-            if (personagem.Vivo)
+            if (personagemJogador.Vivo && (personagemJogador.Id == personagemCurar.Id))
             {
-                if ((personagem.Saude + totalCurar) >= 1000)
+                if ((personagemJogador.Saude + qtdCurar) >= 1000)
                 {
-                    personagem.Saude = 1000;
+                    personagemJogador.Saude = 1000;
                 }
                 else
                 {
-                    personagem.Saude += totalCurar;
+                    personagemJogador.Saude += qtdCurar;
                 }
             }
 
-            return personagem;
+            return personagemJogador;
         }
     }
 }
