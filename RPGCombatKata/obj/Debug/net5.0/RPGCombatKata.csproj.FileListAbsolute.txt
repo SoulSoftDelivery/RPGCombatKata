@@ -1,0 +1,12 @@
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\bin\Debug\net5.0\RPGCombatKata.deps.json
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\bin\Debug\net5.0\RPGCombatKata.dll
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\bin\Debug\net5.0\RPGCombatKata.pdb
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\obj\Debug\net5.0\RPGCombatKata.csproj.AssemblyReference.cache
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\obj\Debug\net5.0\RPGCombatKata.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\obj\Debug\net5.0\RPGCombatKata.AssemblyInfoInputs.cache
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\obj\Debug\net5.0\RPGCombatKata.AssemblyInfo.cs
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\obj\Debug\net5.0\RPGCombatKata.csproj.CoreCompileInputs.cache
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\obj\Debug\net5.0\RPGCombatKata.dll
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\obj\Debug\net5.0\refint\RPGCombatKata.dll
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\obj\Debug\net5.0\RPGCombatKata.pdb
+C:\Users\Felipe Dutra\Desktop\projeto_ideia_no_ar\RPGCombatKata\RPGCombatKata\obj\Debug\net5.0\ref\RPGCombatKata.dll
