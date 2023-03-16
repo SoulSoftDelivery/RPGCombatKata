@@ -43,7 +43,7 @@ namespace RPGCombatKataTest
         {
             //Gera um dano de 500
             var recebeInteracao = Combate.Danificar(interacao, 500);
-            //Verifica a situação de vida do personagem
+            //Verifica a situação de saude do personagem
             Assert.Equal(recebeInteracao.Saude, 500);
         }
 
@@ -55,7 +55,7 @@ namespace RPGCombatKataTest
             interacao.RecebeInteracao = interacao.FazInteracao;
             //Gera um dano de 50
             var fazInteracao = Combate.Danificar(interacao, 50);
-            //Verifica a situação de vida do personagem
+            //Verifica a situação de saude do personagem
             Assert.Equal(fazInteracao.Saude, 1000);
         }
 
@@ -97,18 +97,6 @@ namespace RPGCombatKataTest
             Assert.Equal(recebeInteracao.Saude, 100);
         }
 
-        //Verifica se o jogador causou dano em adversario fora de alcance
-        [Fact]
-        public void Danificar500ForaAlcance()
-        {
-            //Seta distancia entre os jogadores maior que o alcance
-            interacao.DistanciaPersonagens = 30;
-            //Gera um dano de 500
-            var recebeInteracao = Combate.Danificar(interacao, 500);
-            //Verifica a situação de saude do personagem
-            Assert.Equal(recebeInteracao.Saude, 1000);
-        }
-
         //Verifica se o jogador que recebe dano de oponente com diferenca de nivel maior que 5 tem o dano aumentado
         [Fact]
         public void Danificar500AumentarDanoPorNivel()
@@ -131,6 +119,18 @@ namespace RPGCombatKataTest
             var recebeInteracao = Combate.Danificar(interacao, 500);
             //Verifica a situação de saude do personagem
             Assert.Equal(recebeInteracao.Saude, 750);
+        }
+
+        //Verifica se o jogador causou dano em adversario fora de alcance
+        [Fact]
+        public void Danificar500ForaAlcance()
+        {
+            //Seta distancia entre os jogadores maior que o alcance
+            interacao.DistanciaPersonagens = 30;
+            //Gera um dano de 500
+            var recebeInteracao = Combate.Danificar(interacao, 500);
+            //Verifica a situação de saude do personagem
+            Assert.Equal(recebeInteracao.Saude, 1000);
         }
     }
 }
