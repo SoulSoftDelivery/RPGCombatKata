@@ -67,7 +67,7 @@ namespace RPGCombatKata
             {
                 qtdDanificar = CombateUtils.CalculaQtdRealDanificar(interacao.FazInteracao.Nivel, interacao.RecebeInteracao.Nivel, qtdDanificar);
 
-                if ((interacao.FazInteracao.Saude - qtdDanificar) <= 0)
+                if ((interacao.RecebeInteracao.Saude - qtdDanificar) <= 0)
                 {
                     interacao.RecebeInteracao.Saude = 0;
                     interacao.RecebeInteracao.Vivo = false;
